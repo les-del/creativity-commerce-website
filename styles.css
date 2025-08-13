@@ -1,0 +1,338 @@
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CSS Variables */
+:root {
+  --primary-font: 'ABC Diatype Medium', sans-serif;
+  --color-white: #ffffff;
+  --color-black: #000;
+  --color-gray: #444444;
+  --section-padding: 1.25rem;
+  --transition-duration: 0.3s;
+  --border-radius: 20px;
+  --play-button-size: 40%;
+}
+
+/* Font Face */
+@font-face {
+  font-family: 'ABC Diatype Medium';
+  src: url('Fonts/ABC_Diatype_Medium.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* Base Section Styles */
+.section {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero Section */
+.section-hero {
+  background: var(--color-black);
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* About Block Sections */
+.section-about-block {
+  display: flex;
+  padding: var(--section-padding);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4em;
+  background-color: var(--color-gray);
+}
+
+.section-about__heading {
+  font-family: var(--primary-font);
+  font-size: 2em;
+  line-height: 110%;
+  color: var(--color-white);
+  margin-bottom: 0.25em;
+}
+
+.main-text {
+  font-family: var(--primary-font);
+  font-size: 2em;
+  line-height: 110%;
+  color: var(--color-white);
+}
+
+/* Showcase Section */
+.section-showcase {
+  padding: var(--section-padding);
+  background-color: var(--color-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.showcase-wrapper {
+  position: relative;
+  width: 90%;
+}
+
+.section-showcase img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
+
+  .section-showcase .play-button {
+    position: absolute;
+    width: var(--play-button-size);
+    aspect-ratio: 1 / 1;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform var(--transition-duration) ease;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+.section-showcase .play-button:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.section-showcase .play-button span {
+  font-family: var(--primary-font);
+  font-size: 2em;
+  color: var(--color-gray);
+}
+
+/* Full-screen video styles */
+.fullscreen-video-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1000;
+}
+
+.fullscreen-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Hide default browser controls */
+.fullscreen-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.fullscreen-video {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Video controls styles */
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 20px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  opacity: 0;
+  transition: opacity var(--transition-duration) ease;
+}
+
+.fullscreen-video-container:hover .video-controls {
+  opacity: 1;
+}
+
+.play-pause-btn {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 1.5em;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-container {
+  flex-grow: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--color-white);
+  border-radius: 5px;
+  width: 0;
+  transition: width 0.1s ease;
+}
+
+.time-display {
+  color: var(--color-white);
+  font-family: var(--primary-font);
+  font-size: 0.9em;
+}
+
+/* Footer Section */
+.section-footer {
+  padding: var(--section-padding);
+  background-color: var(--color-gray);
+  position: relative;
+}
+
+.footer-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+
+.footer-contact,
+.footer-legal,
+.footer-time {
+  position: absolute;
+  z-index: 2;
+}
+
+.footer-contact {
+  top: var(--section-padding);
+  left: var(--section-padding);
+}
+
+.footer-contact a {
+  display: block;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: opacity var(--transition-duration) ease;
+}
+
+.footer-contact a:hover {
+  opacity: 0.8;
+}
+
+.footer-legal {
+  bottom: calc(var(--section-padding) + 0.25em);
+  left: var(--section-padding);
+}
+
+.footer-time {
+  bottom: var(--section-padding);
+  right: var(--section-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+  .small-text {
+    font-family: var(--primary-font);
+    font-size: 1em;
+    color: var(--color-white);
+    line-height: 110%;
+  }
+
+  /* Blockquote styling */
+  blockquote {
+    margin: 2em 0;
+    padding: 1em 0;
+    border-left: 3px solid var(--color-white);
+    padding-left: 1.5em;
+    font-style: italic;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    opacity: 0.8;
+    font-style: normal;
+  }
+
+/* Hide scrollbar */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Media query for portrait mode */
+@media (orientation: portrait) {
+  .footer-video {
+    object-fit: contain;
+  }
+
+  .section-about__heading,
+  .main-text,
+  .section-showcase .play-button span {
+    font-size: 1.2em;
+  }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 1rem;
+  }
+  
+  .section-about__heading,
+  .main-text {
+    font-size: 1.5em;
+  }
+  
+  .section-showcase .play-button span {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-about__heading,
+  .main-text {
+    font-size: 1.2em;
+  }
+  
+  .section-showcase .play-button span {
+    font-size: 1.2em;
+  }
+  
+  .footer-contact a {
+    font-size: 1.5em;
+  }
+}
