@@ -5,7 +5,267 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creativity & Commerce - Creative problem solving for commercial growth">
   <title>Creativity & Commerce</title>
-  <link rel="stylesheet" href="styles.css">
+<style>
+  /* Reset default margins and padding */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* CSS Variables */
+  :root {
+    --primary-font: 'ABC Diatype Medium', sans-serif;
+    --color-white: #ffffff;
+    --color-black: #000;
+    --color-gray: #444444;
+    --section-padding: 1.25rem;
+  }
+
+  /* Font Face */
+  @font-face {
+    font-family: 'ABC Diatype Medium';
+    src: url('Fonts/ABC_Diatype_Medium.ttf') format('truetype');
+    font-display: swap;
+  }
+
+  /* Base Section Styles */
+  .section {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Hero Section */
+  .section-hero {
+    background: var(--color-black);
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* About Block Sections */
+  .section-about-block {
+    display: flex;
+    padding: var(--section-padding);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4em;
+    background-color: var(--color-gray);
+  }
+
+  .section-about__block {
+    width: 80%;
+    margin: 0;
+    align-self: flex-start;
+  }
+
+  .section-about__heading {
+    font-family: var(--primary-font);
+    font-size: 2em;
+    line-height: 110%;
+    color: var(--color-white);
+    margin-bottom: 0.25em;
+  }
+
+  .main-text {
+    font-family: var(--primary-font);
+    font-size: 2em;
+    line-height: 110%;
+    color: var(--color-white);
+  }
+
+  /* Showcase Section */
+  .section-showcase {
+    padding: var(--section-padding);
+    background-color: var(--color-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .showcase-wrapper {
+    position: relative;
+    width: 90%;
+  }
+
+  .section-showcase img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .section-showcase .play-button {
+    position: absolute;
+    width: 40%;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .section-showcase .play-button:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  .section-showcase .play-button span {
+    font-family: var(--primary-font);
+    font-size: 2em;
+    color: var(--color-gray);
+  }
+
+  /* Full-screen video styles */
+  .fullscreen-video-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    z-index: 1000;
+  }
+
+  .fullscreen-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100vw;
+    max-height: 100vh;
+    z-index: 1001;
+  }
+
+  /* Force controls to be always visible in WebKit browsers */
+  .fullscreen-video::-webkit-media-controls-panel {
+    display: flex !important;
+    opacity: 1 !important;
+  }
+
+  /* Footer Section */
+  .section-footer {
+    padding: var(--section-padding);
+    background-color: var(--color-gray);
+    position: relative;
+  }
+
+  .footer-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    mix-blend-mode: screen;
+    z-index: 1;
+  }
+
+  .footer-contact,
+  .footer-legal,
+  .footer-time {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .footer-contact {
+    top: var(--section-padding);
+    left: var(--section-padding);
+  }
+
+  .footer-contact a {
+    display: block;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: opacity 0.3s ease;
+  }
+
+  .footer-contact a:hover {
+    opacity: 0.8;
+  }
+
+  .footer-legal {
+    bottom: calc(var(--section-padding) + 0.25em);
+    left: var(--section-padding);
+  }
+
+  .footer-time {
+    bottom: var(--section-padding);
+    right: var(--section-padding);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .small-text {
+    font-family: var(--primary-font);
+    font-size: 1em;
+    color: var(--color-white);
+    line-height: 110%;
+  }
+
+  /* Hide scrollbar */
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Media query for portrait mode */
+  @media (orientation: portrait) {
+    .footer-video {
+      object-fit: contain;
+    }
+  }
+
+  /* Responsive breakpoints */
+  @media (max-width: 768px) {
+    :root {
+      --section-padding: 1rem;
+    }
+    
+    .section-about__heading,
+    .main-text,
+    .section-showcase .play-button span {
+      font-size: 1.5em;
+    }
+
+    /* Full width on tablet and below */
+    .section-about__block {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-about__heading,
+    .main-text,
+    .section-showcase .play-button span {
+      font-size: 1.2em;
+    }
+    
+    .footer-contact a {
+      font-size: 1.5em;
+    }
+  }
+</style>
 </head>
 <body>
   <main>
@@ -90,18 +350,11 @@
         <button class="play-button" aria-label="Play showcase reel">
           <span>Play Reel</span>
         </button>
-        <div class="fullscreen-video-container" role="dialog" aria-label="Fullscreen video player">
+        <div class="fullscreen-video-container">
           <video class="fullscreen-video" preload="metadata" controls>
             <source src="Video/dummy_reel.mp4" type="video/mp4">
             <p>Your browser does not support the video tag.</p>
           </video>
-          <div class="video-controls" role="toolbar" aria-label="Video controls">
-            <button class="play-pause-btn" aria-label="Play/Pause video">▶</button>
-            <div class="progress-container" role="slider" aria-label="Video progress" tabindex="0">
-              <div class="progress-bar"></div>
-            </div>
-            <span class="time-display" aria-live="polite">0:00 / 0:00</span>
-          </div>
         </div>
       </div>
     </section>
@@ -143,6 +396,191 @@
   <!-- External Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  let panels = gsap.utils.toArray(".section");
+  let tops = panels.map(panel => ScrollTrigger.create({trigger: panel, start: "top top"}));
+
+  panels.forEach((panel, i) => {
+    ScrollTrigger.create({
+      trigger: panel,
+      start: () => panel.offsetHeight < window.innerHeight ? "top top" : "bottom bottom",
+      pin: true, 
+      pinSpacing: false 
+    });
+  });
+
+  ScrollTrigger.create({
+    snap: {
+      snapTo: (progress, self) => {
+        let panelStarts = tops.map(st => st.start);
+        let snapScroll = gsap.utils.snap(panelStarts, self.scroll());
+        return gsap.utils.normalize(0, ScrollTrigger.maxScroll(window), snapScroll);
+      },
+      duration: 0.5
+    }
+  });
+
+  panels.slice(1).forEach((panel) => {
+    gsap.set(panel, {opacity: 0});
+    gsap.to(panel, {
+      opacity: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: panel,
+        start: "top bottom",
+        end: "top top",
+        scrub: true
+      }
+    });
+  });
+
+  // Simple video player
+  const playButton = document.querySelector('.play-button');
+  const videoContainer = document.querySelector('.fullscreen-video-container');
+  const video = document.querySelector('.fullscreen-video');
+
+  playButton.addEventListener('click', () => {
+    videoContainer.style.display = 'block';
+    video.play();
+    video.focus(); // Ensure video gets focus to show controls initially
+    // Prevent scrolling when video is open
+    document.body.style.overflow = 'hidden';
+  });
+
+  // Close on escape key
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && videoContainer.style.display === 'block') {
+      videoContainer.style.display = 'none';
+      video.pause();
+      
+      // Restore scrolling when video closes
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  // Close when clicking on video container background
+  videoContainer.addEventListener('click', (event) => {
+    if (event.target === videoContainer) {
+      videoContainer.style.display = 'none';
+      video.pause();
+      
+      // Restore scrolling when video closes
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  // Function to format time (e.g., 12:14)
+  function formatTime(timeZone) {
+    return new Date().toLocaleTimeString('en-US', {
+      timeZone: timeZone,
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  // Sydney timezone is fixed
+  const sydTimeZone = 'Australia/Sydney';
+  const sydTimeElement = document.querySelector('.footer-time p:first-child');
+
+  // Update Sydney time
+  function updateSydneyTime() {
+    if (sydTimeElement) {
+      sydTimeElement.textContent = `SYD ${formatTime(sydTimeZone)}`;
+    }
+  }
+
+  // Local time variables
+  let localCityCode = '---';
+  let localTimeZone = 'UTC';
+  let isInSydney = false;
+  const localTimeElement = document.querySelector('.footer-time p:last-child');
+
+  // List of random cities with codes and timezones
+  const randomCities = [
+    { code: 'NYC', tz: 'America/New_York' },
+    { code: 'LDN', tz: 'Europe/London' },
+    { code: 'TOK', tz: 'Asia/Tokyo' },
+    { code: 'PAR', tz: 'Europe/Paris' },
+    { code: 'LAX', tz: 'America/Los_Angeles' },
+    { code: 'BER', tz: 'Europe/Berlin' },
+    { code: 'DXB', tz: 'Asia/Dubai' },
+    { code: 'SIN', tz: 'Asia/Singapore' },
+    { code: 'JNB', tz: 'Africa/Johannesburg' },
+    { code: 'RIO', tz: 'America/Sao_Paulo' }
+  ];
+
+  // Function to pick a random city
+  function pickRandomCity() {
+    const randomIndex = Math.floor(Math.random() * randomCities.length);
+    localCityCode = randomCities[randomIndex].code;
+    localTimeZone = randomCities[randomIndex].tz;
+  }
+
+  // Set initial placeholder for local time
+  if (localTimeElement) {
+    localTimeElement.textContent = '--- --:--';
+  }
+
+  // Fetch local info once
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(data => {
+      const city = data.city || 'Unknown';
+      localTimeZone = data.timezone || 'UTC';
+      localCityCode = city.slice(0, 3).toUpperCase();
+
+      // Check if in Sydney
+      if (city.toLowerCase() === 'sydney' || localTimeZone === 'Australia/Sydney') {
+        isInSydney = true;
+        pickRandomCity();
+      }
+
+      updateLocalTime();
+    })
+    .catch(error => {
+      console.error('Error fetching local info:', error);
+    });
+
+  // Update local time
+  function updateLocalTime() {
+    if (localTimeElement && localCityCode !== '---') {
+      localTimeElement.textContent = `${localCityCode} ${formatTime(localTimeZone)}`;
+    }
+  }
+
+  // Initial update for Sydney
+  updateSydneyTime();
+
+  // Update times every second
+  setInterval(() => {
+    updateSydneyTime();
+    updateLocalTime();
+  }, 1000);
+
+  // Always cycle through random cities every 3 seconds
+  setInterval(() => {
+    pickRandomCity();
+    updateLocalTime();
+  }, 3000);
+
+  // Handle window resize to fix GSAP ScrollTrigger issues
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    // Clear the timer
+    clearTimeout(resizeTimer);
+    
+    // Set a new timer to refresh ScrollTrigger after resize is complete
+    resizeTimer = setTimeout(() => {
+      // Refresh all ScrollTrigger instances
+      ScrollTrigger.refresh();
+      
+      // Force a reflow to ensure proper sizing
+      document.body.offsetHeight;
+    }, 250); // Wait 250ms after resize stops
+  });
+</script>
 </body>
 </html>
