@@ -57,9 +57,8 @@
   }
 
   .section-about__block {
-    width: 100%;
-    max-width: 80%;
-    margin: 0 auto;
+    width: 80%;
+    margin: 0;
     align-self: flex-start;
   }
 
@@ -124,8 +123,24 @@
 
 .section-showcase .play-button span {
   font-family: var(--primary-font);
-  font-size: 2em;
+  font-size: 2em !important;
   color: var(--color-gray);
+}
+
+/* Ensure desktop size overrides media queries */
+@media (min-width: 769px) {
+  .section-showcase .play-button span {
+    font-size: 2em !important;
+  }
+}
+
+/* Nuclear option - maximum specificity */
+body .section-showcase .play-button span {
+  font-size: 2em !important;
+}
+
+html body .section-showcase .play-button span {
+  font-size: 2em !important;
 }
 
 /* Full-screen video styles */
@@ -305,12 +320,6 @@ html::-webkit-scrollbar {
   .footer-video {
     object-fit: contain;
   }
-
-  .section-about__heading,
-  .main-text,
-  .section-showcase .play-button span {
-    font-size: 1.2em;
-  }
 }
 
 /* Responsive breakpoints */
@@ -320,10 +329,7 @@ html::-webkit-scrollbar {
   }
   
   .section-about__heading,
-  .main-text {
-    font-size: 1.5em;
-  }
-  
+  .main-text,
   .section-showcase .play-button span {
     font-size: 1.5em;
   }
@@ -336,10 +342,7 @@ html::-webkit-scrollbar {
 
 @media (max-width: 480px) {
   .section-about__heading,
-  .main-text {
-    font-size: 1.2em;
-  }
-  
+  .main-text,
   .section-showcase .play-button span {
     font-size: 1.2em;
   }
