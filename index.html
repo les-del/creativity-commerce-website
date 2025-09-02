@@ -51,6 +51,15 @@
     left: 0;
   }
 
+  /* Show desktop video by default, hide mobile video */
+  .hero-video-desktop {
+    display: block;
+  }
+
+  .hero-video-mobile {
+    display: none;
+  }
+
   /* About Block Sections */
   .section-about-block {
     display: flex;
@@ -132,6 +141,13 @@
     color: var(--color-gray);
   }
 
+  /* Ensure 2em font size on desktop */
+  @media (min-width: 769px) {
+    .section-showcase .play-button span {
+      font-size: 2em !important;
+    }
+  }
+
   /* Full-screen video styles */
   .fullscreen-video-container {
     display: none;
@@ -162,7 +178,7 @@
   /* Footer Section */
   .section-footer {
     padding: var(--section-padding);
-    background-color: var(--color-gray);
+    background-color: #FF4800;
     position: relative;
   }
 
@@ -220,6 +236,87 @@
     line-height: 110%;
   }
 
+  /* Logo Ticker Styles */
+  .logo-ticker-container {
+    position: absolute;
+    bottom: var(--section-padding);
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    height: 12em;
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .logo-ticker {
+    display: flex;
+    white-space: nowrap;
+    transition: animation-duration 0.3s ease;
+    gap: 4em;
+    height: 4em;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .logo-ticker-top {
+    animation: scroll-left 120s linear infinite;
+  }
+
+  .logo-ticker-bottom {
+    animation: scroll-right 120s linear infinite;
+  }
+
+  .logo-ticker:hover {
+    animation-duration: 10s;
+  }
+
+  .logo-ticker-track {
+    display: flex;
+    align-items: center;
+    gap: 4em;
+    flex-shrink: 0;
+  }
+
+  .logo-item {
+    height: 4em;
+    width: auto;
+    filter: brightness(0) invert(1); /* Makes SVG white */
+    object-fit: contain;
+    flex-shrink: 0;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes scroll-right {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+
+
+
+
   /* Hide scrollbar */
   html {
     scrollbar-width: none;
@@ -252,6 +349,15 @@
     .section-about__block {
       width: 100%;
     }
+
+    /* Switch to mobile video on mobile breakpoints */
+    .hero-video-desktop {
+      display: none;
+    }
+
+    .hero-video-mobile {
+      display: block;
+    }
   }
 
   @media (max-width: 480px) {
@@ -276,10 +382,22 @@
         loop 
         playsinline 
         preload="metadata" 
-        class="hero-video" 
+        class="hero-video hero-video-desktop" 
         poster="Images/video_poster.png"
         aria-hidden="true">
-        <source src="Video/header_video.mp4" type="video/mp4">
+        <source src="Video/Cover_video_1x1.mp4" type="video/mp4">
+        <p>Your browser does not support the video tag.</p>
+      </video>
+      <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        preload="metadata" 
+        class="hero-video hero-video-mobile" 
+        poster="Images/video_poster.png"
+        aria-hidden="true">
+        <source src="Video/Cover_video_9x16.mp4" type="video/mp4">
         <p>Your browser does not support the video tag.</p>
       </video>
     </section>
@@ -322,6 +440,10 @@
         <h2 id="who-heading" class="section-about__heading">WHO</h2>
         <p class="main-text">
           We're creative entrepreneurs who have successfully created, built, and sold brands and businesses. Our unique local and international experience helps to identify and unlock valuable creative opportunities within an organisation that can lead to outsized returns.
+          <br><br>
+          Founded by Justin Drape - Co-founder of The Monkeys (now Droga5) - Co-founder of Exceptional ALIEN - Former Group Chief Creative Officer of The Monkeys & Accenture Interactive ANZ - 20+ years experience building Fortune 500 brands. Justin's career has spanned advertising, entertainment, design & publishing with roles including Business Founder/Owner, CCO, CEO, Writer, Art Director, Executive Producer, Board Member and Mentor.
+          <br><br>
+          The Monkeys won more than 500 creative awards – including Cannes Lions, D&AD, One Show, Clio, Webbys, Australian Film Institute, Logies, multiple Grand Prix, plus 72 Agency of the Year Awards; with work featured in The Guiness Book of Records and the National Library of Australia. The agency was crowned B&T Australian Creative Agency of the Decade. In 2024 Drape was inducted into the AWARD Hall of Fame.
         </p>
       </div>
     </section>
@@ -332,6 +454,25 @@
         <p class="main-text">
           We have no borders. Our global community spans a range of practices and talent, including: Grammy Award winners, Academy Award nominees, Michelin Star chefs, Olympic gold medallists, renowned entrepreneurs, and world champions.
         </p>
+      </div>
+    </section>
+
+    <section class="section section-about-block" aria-labelledby="brands-heading">
+      <div class="section-about__block">
+        <h2 id="brands-heading" class="section-about__heading">BRANDS</h2>
+        <p class="main-text">
+          We've collaborated with an eclectic mix of global brands, organisations, and industries—harnessing the power of creativity to fuel their commercial ambitions.
+        </p>
+      </div>
+      
+      <!-- Logo Tickers -->
+      <div class="logo-ticker-container">
+        <div class="logo-ticker logo-ticker-top" id="logo-ticker-top">
+          <!-- Logos will be dynamically inserted here -->
+        </div>
+        <div class="logo-ticker logo-ticker-bottom" id="logo-ticker-bottom">
+          <!-- Logos will be dynamically inserted here -->
+        </div>
       </div>
     </section>
 
@@ -352,7 +493,7 @@
         </button>
         <div class="fullscreen-video-container">
           <video class="fullscreen-video" preload="metadata" controls>
-            <source src="Video/dummy_reel.mp4" type="video/mp4">
+            <source src="Video/C&C_Showreel_EDIT_V12_optimized.mp4" type="video/mp4">
             <p>Your browser does not support the video tag.</p>
           </video>
         </div>
@@ -422,19 +563,7 @@
     }
   });
 
-  panels.slice(1).forEach((panel) => {
-    gsap.set(panel, {opacity: 0});
-    gsap.to(panel, {
-      opacity: 1,
-      ease: "none",
-      scrollTrigger: {
-        trigger: panel,
-        start: "top bottom",
-        end: "top top",
-        scrub: true
-      }
-    });
-  });
+
 
   // Simple video player
   const playButton = document.querySelector('.play-button');
@@ -566,6 +695,88 @@
     updateLocalTime();
   }, 3000);
 
+  // Create logo tickers
+  function createLogoTickers() {
+    const logoTickerTop = document.getElementById('logo-ticker-top');
+    const logoTickerBottom = document.getElementById('logo-ticker-bottom');
+    if (!logoTickerTop || !logoTickerBottom) return;
+
+    // Array of all logo data
+    const logos = [
+      { src: 'Images/svg/AccentureSong.svg', alt: 'Accenture Song' },
+      { src: 'Images/svg/Asia_Cup.svg', alt: 'Asia Cup' },
+      { src: 'Images/svg/Atout.svg', alt: 'Atout' },
+      { src: 'Images/svg/Aus_Gov.svg', alt: 'Australian Government' },
+      { src: 'Images/svg/Coca cola.svg', alt: 'Coca Cola' },
+      { src: 'Images/svg/dc-shoe-co-usa.svg', alt: 'DC Shoes' },
+      { src: 'Images/svg/Diageo.svg', alt: 'Diageo' },
+      { src: 'Images/svg/fox_sports.svg', alt: 'Fox Sports' },
+      { src: 'Images/svg/Future_classic.svg', alt: 'Future Classic' },
+      { src: 'Images/svg/FWT.svg', alt: 'FWT' },
+      { src: 'Images/svg/General-Mills-logo.svg', alt: 'General Mills' },
+      { src: 'Images/svg/Google.svg', alt: 'Google' },
+      { src: 'Images/svg/honda-auto-logo--large.svg', alt: 'Honda' },
+      { src: 'Images/svg/ikea.svg', alt: 'IKEA' },
+      { src: 'Images/svg/intel.svg', alt: 'Intel' },
+      { src: 'Images/svg/lexus.svg', alt: 'Lexus' },
+      { src: 'Images/svg/Lion_logo_header-1676397523120.svg', alt: 'Lion' },
+      { src: 'Images/svg/Marriot.svg', alt: 'Marriott' },
+      { src: 'Images/svg/Monkeys.svg', alt: 'The Monkeys' },
+      { src: 'Images/svg/new-zealand-logo.svg', alt: 'New Zealand' },
+      { src: 'Images/svg/NRL.svg', alt: 'NRL' },
+      { src: 'Images/svg/qantas-vector-logo.svg', alt: 'Qantas' },
+      { src: 'Images/svg/skyscanner.svg', alt: 'Skyscanner' },
+      { src: 'Images/svg/south-african-tourism-seeklogo.svg', alt: 'South African Tourism' },
+      { src: 'Images/svg/suntory_logo.svg', alt: 'Suntory' },
+      { src: 'Images/svg/Telstra_logo.svg', alt: 'Telstra' },
+      { src: 'Images/svg/toyota.svg', alt: 'Toyota' },
+      { src: 'Images/svg/universal.svg', alt: 'Universal' },
+      { src: 'Images/svg/Victoria.svg', alt: 'Victoria' },
+      { src: 'Images/svg/Warner Music Group logo since 2021.svg', alt: 'Warner Music Group' }
+    ];
+
+    // Create tracks for both tickers
+    function createTickerTracks(ticker) {
+      const track1 = document.createElement('div');
+      track1.className = 'logo-ticker-track';
+      
+      const track2 = document.createElement('div');
+      track2.className = 'logo-ticker-track';
+
+      // Add all logos to both tracks
+      logos.forEach(logo => {
+        const img1 = document.createElement('img');
+        img1.src = logo.src;
+        img1.alt = logo.alt;
+        img1.className = 'logo-item';
+        
+        const img2 = document.createElement('img');
+        img2.src = logo.src;
+        img2.alt = logo.alt;
+        img2.className = 'logo-item';
+        
+        track1.appendChild(img1);
+        track2.appendChild(img2);
+      });
+
+      // Clear existing content and add tracks
+      ticker.innerHTML = '';
+      ticker.appendChild(track1);
+      ticker.appendChild(track2);
+    }
+
+    // Populate both tickers
+    createTickerTracks(logoTickerTop);
+    createTickerTracks(logoTickerBottom);
+  }
+
+  // Initialize logo tickers when page loads
+  createLogoTickers();
+
+
+
+
+
   // Handle window resize to fix GSAP ScrollTrigger issues
   let resizeTimer;
   window.addEventListener('resize', () => {
@@ -580,6 +791,40 @@
       // Force a reflow to ensure proper sizing
       document.body.offsetHeight;
     }, 250); // Wait 250ms after resize stops
+  });
+
+  // Add scroll recovery system
+  let scrollRecoveryTimer;
+  let lastScrollTime = Date.now();
+  
+  function checkScrollHealth() {
+    const now = Date.now();
+    if (now - lastScrollTime > 2000) { // If no scroll for 2 seconds
+      // Check if scroll is stuck
+      const currentScroll = window.pageYOffset;
+      setTimeout(() => {
+        if (window.pageYOffset === currentScroll) {
+          // Scroll appears stuck, refresh ScrollTrigger
+          console.log('Scroll appears stuck, refreshing ScrollTrigger...');
+          ScrollTrigger.refresh();
+        }
+      }, 100);
+    }
+  }
+
+  // Monitor scroll activity
+  window.addEventListener('scroll', () => {
+    lastScrollTime = Date.now();
+    clearTimeout(scrollRecoveryTimer);
+    scrollRecoveryTimer = setTimeout(checkScrollHealth, 2000);
+  });
+
+  // Add escape key to refresh ScrollTrigger if stuck
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      console.log('Escape pressed, refreshing ScrollTrigger...');
+      ScrollTrigger.refresh();
+    }
   });
 </script>
 </body>
