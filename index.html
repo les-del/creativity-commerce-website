@@ -801,39 +801,7 @@
     }, 250); // Wait 250ms after resize stops
   });
 
-  // Add scroll recovery system
-  let scrollRecoveryTimer;
-  let lastScrollTime = Date.now();
-  
-  function checkScrollHealth() {
-    const now = Date.now();
-    if (now - lastScrollTime > 2000) { // If no scroll for 2 seconds
-      // Check if scroll is stuck
-      const currentScroll = window.pageYOffset;
-      setTimeout(() => {
-        if (window.pageYOffset === currentScroll) {
-          // Scroll appears stuck, refresh ScrollTrigger
-          console.log('Scroll appears stuck, refreshing ScrollTrigger...');
-          ScrollTrigger.refresh();
-        }
-      }, 100);
-    }
-  }
 
-  // Monitor scroll activity
-  window.addEventListener('scroll', () => {
-    lastScrollTime = Date.now();
-    clearTimeout(scrollRecoveryTimer);
-    scrollRecoveryTimer = setTimeout(checkScrollHealth, 2000);
-  });
-
-  // Add escape key to refresh ScrollTrigger if stuck
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      console.log('Escape pressed, refreshing ScrollTrigger...');
-      ScrollTrigger.refresh();
-    }
-  });
 </script>
 </body>
 </html>
