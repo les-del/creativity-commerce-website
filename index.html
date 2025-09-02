@@ -239,7 +239,7 @@
   /* Logo Ticker Styles */
   .logo-ticker-container {
     position: absolute;
-    bottom: var(--section-padding);
+    bottom: 2.5rem;
     left: 0;
     right: 0;
     overflow: hidden;
@@ -259,16 +259,17 @@
     gap: 4em;
     height: 4em;
     will-change: transform;
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
+    perspective: 1000px;
   }
 
   .logo-ticker-top {
-    animation: scroll-left 120s linear infinite;
+    animation: scroll-left 30s linear infinite;
   }
 
   .logo-ticker-bottom {
-    animation: scroll-right 120s linear infinite;
+    animation: scroll-right 30s linear infinite;
   }
 
   .logo-ticker:hover {
@@ -289,27 +290,29 @@
     object-fit: contain;
     flex-shrink: 0;
     will-change: transform;
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    shape-rendering: geometricPrecision;
+    vector-effect: non-scaling-stroke;
   }
 
   @keyframes scroll-left {
     0% {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
     100% {
-      transform: translateX(-100%);
+      transform: translate3d(-100%, 0, 0);
     }
   }
 
   @keyframes scroll-right {
     0% {
-      transform: translateX(-100%);
+      transform: translate3d(-100%, 0, 0);
     }
     100% {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
@@ -735,16 +738,21 @@
       { src: 'Images/svg/Warner Music Group logo since 2021.svg', alt: 'Warner Music Group' }
     ];
 
-    // Create tracks for both tickers
-    function createTickerTracks(ticker) {
+    // Split logos into two groups (15 logos each)
+    const logosPerTicker = Math.ceil(logos.length / 2);
+    const topLogos = logos.slice(0, logosPerTicker);
+    const bottomLogos = logos.slice(logosPerTicker);
+
+    // Create tracks for a specific ticker with specific logos
+    function createTickerTracks(ticker, logoSet) {
       const track1 = document.createElement('div');
       track1.className = 'logo-ticker-track';
       
       const track2 = document.createElement('div');
       track2.className = 'logo-ticker-track';
 
-      // Add all logos to both tracks
-      logos.forEach(logo => {
+      // Add logos to both tracks
+      logoSet.forEach(logo => {
         const img1 = document.createElement('img');
         img1.src = logo.src;
         img1.alt = logo.alt;
@@ -765,9 +773,9 @@
       ticker.appendChild(track2);
     }
 
-    // Populate both tickers
-    createTickerTracks(logoTickerTop);
-    createTickerTracks(logoTickerBottom);
+    // Populate each ticker with different logo sets
+    createTickerTracks(logoTickerTop, topLogos);
+    createTickerTracks(logoTickerBottom, bottomLogos);
   }
 
   // Initialize logo tickers when page loads
