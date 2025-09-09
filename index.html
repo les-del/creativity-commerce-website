@@ -3,8 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Creativity & Commerce - Creative problem solving for commercial growth">
+  <meta name="description" content="Creative problem solving for commercial growth. We help Fortune 500 brands, SMEs, startups, and government institutions unlock valuable creative opportunities that drive business results through strategic creativity."
   <title>Creativity & Commerce</title>
+  
+  <!-- Favicon and Apple Touch Icons -->
+  <link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="Images/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="Images/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="Images/apple-touch-icon.png">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://creativityandcommerce.co/">
+  <meta property="og:title" content="Creativity & Commerce">
+  <meta property="og:description" content="Founded by Justin Drape, co-founder of The Monkeys (Droga5). We help Fortune 500 brands, SMEs, startups, and government unlock creative opportunities that drive outsized business results through strategic creativity and commercial growth solutions."
+  <meta property="og:image" content="Images/C&C_logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://creativityandcommerce.co/">
+  <meta property="twitter:title" content="Creativity & Commerce">
+  <meta property="twitter:description" content="Founded by Justin Drape, co-founder of The Monkeys (Droga5). We help Fortune 500 brands, SMEs, startups, and government unlock creative opportunities that drive outsized business results through strategic creativity."
+  <meta property="twitter:image" content="Images/C&C_logo.png">
+  
+  <!-- Additional SEO -->
+  <meta name="author" content="Creativity & Commerce">
+  <meta name="keywords" content="creativity, commerce, creative strategy, brand growth, creative problem solving, commercial growth, strategic creativity, business transformation, creative consulting, brand development, creative leadership, innovation strategy, creative services, business growth, creative solutions, brand strategy, creative direction, commercial creativity, creative agency, business consulting"
+  <link rel="canonical" href="https://creativityandcommerce.co/">
 <style>
   /* Reset default margins and padding */
   * {
@@ -24,7 +51,7 @@
 
   /* Font Face */
   @font-face {
-    font-family: 'ABC Diatype Medium';
+    font-family: 'ABC Diatype Medium'; 
     src: url('Fonts/ABC_Diatype_Medium.ttf') format('truetype');
     font-display: swap;
   }
@@ -49,6 +76,26 @@
     position: absolute;
     top: 0;
     left: 0;
+  }
+
+  .hero-down-arrow {
+    position: absolute;
+    bottom: var(--section-padding);
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3em;
+    width: auto;
+    z-index: 10;
+    animation: float 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0px);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-12px);
+    }
   }
 
   /* Show desktop video by default, hide mobile video */
@@ -410,6 +457,7 @@
         <source src="Video/Cover_video_9x16.mp4" type="video/mp4">
         <p>Your browser does not support the video tag.</p>
       </video>
+      <img src="Images/svg/down_arrow.svg" alt="Scroll down" class="hero-down-arrow">
     </section>
 
     <section class="section section-about-block" aria-labelledby="why-heading">
@@ -472,7 +520,7 @@
       <div class="section-about__block">
         <h2 id="brands-heading" class="section-about__heading">BRANDS</h2>
         <p class="main-text">
-          We've collaborated with an eclectic mix of global brands, organisations, and industries—harnessing the power of creativity to fuel their commercial ambitions.
+          Our network of talent have worked with global Fortune 500 brands, SMEs, Startups, NFPs, Government and Arts and Entertainment Groups.
         </p>
       </div>
       
@@ -527,8 +575,8 @@
     </video>
     
     <div class="footer-contact">
-      <a href="mailto:hello@creativityandcommerce.co" class="main-text">hello@creativityandcommerce.co</a>
-      <a href="tel:+61433576891" class="main-text">+61 433 576 891</a>
+      <a href="mailto:justin@creativityandcommerce.com" class="main-text">justin@creativityandcommerce.com</a>
+      <a href="tel:+61433576891" class="main-text">+61 412 141 075</a>
       <br>
       <a href="https://linkedin.com/company/108689068/admin/dashboard/" class="main-text" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://www.instagram.com/creativityandcommerce" class="main-text" target="_blank" rel="noopener noreferrer">Instagram</a>
