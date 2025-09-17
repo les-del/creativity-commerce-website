@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Creativity & Commerce">
-  <title>Creativity & Commerce</title>
+  <meta name="description" content="CREATIVITY & COMMERCE is a practice that uses creative problem solving and strategic thinking to nurture commercial growth.">
+  <title>CREATIVITY & COMMERCE</title>
 <style>
   /* Reset default margins and padding */
   * {
@@ -108,7 +108,7 @@
   }
 
   .section-about__block {
-    width: 80%;
+    width: 100%;
     margin: 0;
     align-self: flex-start;
   }
@@ -126,6 +126,13 @@
     font-size: 2em;
     line-height: 110%;
     color: var(--color-white);
+  }
+
+  .disclaimer-text {
+    position: absolute;
+    bottom: var(--section-padding);
+    left: var(--section-padding);
+    margin: 0;
   }
 
   /* Showcase Section */
@@ -374,6 +381,20 @@
   }
 
   /* Responsive breakpoints */
+  
+  /* Tablet breakpoint - halfway between mobile (1em) and desktop (2em) = 1.5em */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .section-about__heading,
+    .main-text {
+      font-size: 1.5em;
+    }
+    
+    .section-showcase .play-button span {
+      font-size: 1.5em;
+    }
+  }
+  
+  /* Mobile breakpoint */
   @media (max-width: 768px) {
     :root {
       --section-padding: 1rem;
@@ -382,12 +403,18 @@
     .section-about__heading,
     .main-text,
     .section-showcase .play-button span {
-      font-size: 1.5em;
+      font-size: 0.75em;
     }
 
-    /* Full width on tablet and below */
-    .section-about__block {
-      width: 100%;
+    .disclaimer-text {
+      font-size: 0.75em;
+    }
+
+    /* Make all footer text the same size on mobile */
+    .footer-contact a,
+    .footer-legal .small-text,
+    .footer-time .main-text {
+      font-size: 0.75em;
     }
 
     /* Switch to mobile video on mobile breakpoints */
@@ -400,15 +427,26 @@
     }
   }
 
+  /* Small mobile breakpoint - same as mobile */
   @media (max-width: 480px) {
     .section-about__heading,
-    .main-text,
-    .section-showcase .play-button span {
-      font-size: 1.2em;
+    .main-text {
+      font-size: 0.75em;
     }
     
-    .footer-contact a {
-      font-size: 1.5em;
+    .section-showcase .play-button span {
+      font-size: 0.75em;
+    }
+    
+    .disclaimer-text {
+      font-size: 0.75em;
+    }
+    
+    /* Make all footer text the same size on small mobile */
+    .footer-contact a,
+    .footer-legal .small-text,
+    .footer-time .main-text {
+      font-size: 0.75em;
     }
 
     .scroll-arrow {
@@ -495,6 +533,11 @@
           <br><br>
           The Monkeys won more than 500 creative awards – including Cannes Lions, D&AD, One Show, Clio, Webbys, Australian Film Institute, Logies, multiple Grand Prix, plus 72 Agency of the Year Awards; with work featured in The Guiness Book of Records and the National Library of Australia. The agency was crowned B&T Australian Creative Agency of the Decade. In 2024 Drape was inducted into the AWARD Hall of Fame.
         </p>
+        
+        <!-- Disclaimer -->
+        <p class="small-text disclaimer-text">
+          The showreel below includes some of Drape's work from Exceptional ALIEN, The Monkeys and other art, talent and brand collaborations.
+        </p>
       </div>
     </section>
 
@@ -543,7 +586,7 @@
         </button>
         <div class="fullscreen-video-container">
           <video class="fullscreen-video" preload="metadata" controls>
-            <source src="Video/C&C_Showreel_EDIT_V12_optimized.mp4" type="video/mp4">
+            <source src="Video/Justin_Drape_Showreel_optimized.mp4" type="video/mp4">
             <p>Your browser does not support the video tag.</p>
           </video>
         </div>
