@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CREATIVITY & COMMERCE is a practice that uses creative problem solving and strategic thinking to nurture commercial growth.">
-  <title>CREATIVITY & COMMERCE</title>
+  <title>CREATIVITY & COMMERCE - STAGING V2</title>
 <style>
   /* Reset default margins and padding */
   * {
@@ -133,6 +133,7 @@
     bottom: var(--section-padding);
     left: var(--section-padding);
     margin: 0;
+    color: #808080; /* 50% black (mid-gray) */
   }
 
   /* Showcase Section */
@@ -147,7 +148,7 @@
 
   .showcase-wrapper {
     position: relative;
-    width: 90%;
+    width: 67.5%; /* 25% smaller than 90% */
   }
 
   .section-showcase img {
@@ -200,7 +201,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: black;
+    background: transparent;
     z-index: 1000;
   }
 
@@ -211,12 +212,32 @@
     max-width: 100vw;
     max-height: 100vh;
     z-index: 1001;
+    background: transparent;
   }
 
-  /* Force controls to be always visible in WebKit browsers */
+  /* Remove all video overlays and gradients */
+  .fullscreen-video::-webkit-media-controls-overlay-play-button {
+    display: none !important;
+  }
+  
   .fullscreen-video::-webkit-media-controls-panel {
+    background: transparent !important;
     display: flex !important;
     opacity: 1 !important;
+  }
+  
+  .fullscreen-video::-webkit-media-controls {
+    background: transparent !important;
+  }
+  
+  .fullscreen-video::-webkit-media-controls-enclosure {
+    background: transparent !important;
+  }
+  
+  /* Remove any default video gradients */
+  .fullscreen-video::before,
+  .fullscreen-video::after {
+    display: none !important;
   }
 
   /* Footer Section */
@@ -278,6 +299,10 @@
     font-size: 1em;
     color: var(--color-white);
     line-height: 110%;
+  }
+
+  .small-text.disclaimer-text {
+    color: #575757 !important; /* Override to 50% black (mid-gray) */
   }
 
   /* Logo Ticker Styles */
@@ -363,7 +388,6 @@
 
 
 
-
   /* Hide scrollbar */
   html {
     scrollbar-width: none;
@@ -382,7 +406,7 @@
 
   /* Responsive breakpoints */
   
-  /* Tablet breakpoint - halfway between mobile (1em) and desktop (2em) = 1.5em */
+  /* Tablet breakpoint - halfway between mobile (0.75em) and desktop (2em) = 1.5em */
   @media (max-width: 1024px) and (min-width: 769px) {
     .section-about__heading,
     .main-text {
@@ -426,13 +450,18 @@
     .hero-video-mobile {
       display: block;
     }
+
+    /* Make showreel full width on mobile */
+    .showcase-wrapper {
+      width: 100%;
+    }
   }
 
   /* Small mobile breakpoint - same as mobile */
   @media (max-width: 480px) {
     .section-about__heading,
     .main-text {
-      font-size: 1em;
+      font-size: 1.25em;
     }
     
     .section-showcase .play-button span {
@@ -448,7 +477,7 @@
     .footer-contact a,
     .footer-legal .small-text,
     .footer-time .main-text {
-      font-size: 1em;
+      font-size: 1.25em;
     }
 
     .scroll-arrow {
@@ -460,6 +489,7 @@
 </head>
 <body>
   <main>
+    <!-- STAGING V2 VERSION - Combined Videos -->
     <section id="hero" class="section section-hero" aria-label="Hero section with background video">
       <video 
         autoplay 
@@ -470,7 +500,7 @@
         class="hero-video hero-video-desktop" 
         poster="Images/Cover_video_1x1.jpg"
         aria-hidden="true">
-        <source src="Video/Cover_video_1x1.mp4" type="video/mp4">
+        <source src="Video/Cover_video_1x1_combined.mp4" type="video/mp4">
         <p>Your browser does not support the video tag.</p>
       </video>
       <video 
@@ -482,7 +512,7 @@
         class="hero-video hero-video-mobile" 
         poster="Images/Cover_video_9x16.jpg"
         aria-hidden="true">
-        <source src="Video/Cover_video_9x16.mp4" type="video/mp4">
+        <source src="Video/Cover_video_9x16_combined.mp4" type="video/mp4">
         <p>Your browser does not support the video tag.</p>
       </video>
       
@@ -536,10 +566,6 @@
           The Monkeys won more than 500 creative awards – including Cannes Lions, D&AD, One Show, Clio, Webbys, Australian Film Institute, Logies, multiple Grand Prix, plus 72 Agency of the Year Awards; with work featured in The Guiness Book of Records and the National Library of Australia. The agency was crowned B&T Australian Creative Agency of the Decade. In 2024 Drape was inducted into the AWARD Hall of Fame.
         </p>
         
-        <!-- Disclaimer -->
-        <p class="small-text disclaimer-text">
-          The showreel below includes some of Drape's work from Exceptional ALIEN, The Monkeys and other art, talent and brand collaborations.
-        </p>
       </div>
     </section>
 
@@ -593,6 +619,11 @@
           </video>
         </div>
       </div>
+      
+      <!-- Disclaimer -->
+      <p class="small-text disclaimer-text">
+        This above showreel includes some of Drape's work from Exceptional ALIEN, The Monkeys and other art, talent and brand collaborations.
+      </p>
     </section>
   </main>
 
@@ -880,7 +911,6 @@
 
   // Initialize logo tickers when page loads
   createLogoTickers();
-
 
 
 
