@@ -311,45 +311,26 @@
     bottom: 2.5rem;
     left: 0;
     right: 0;
-    overflow: hidden;
     height: 12em;
     display: flex;
     flex-direction: column;
     gap: 4em;
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    overflow: hidden;
   }
 
-  .logo-ticker {
-    display: flex;
-    white-space: nowrap;
-    transition: animation-duration 0.3s ease;
-    gap: 4em;
+  .ticker-track {
     height: 4em;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
   }
 
-  .logo-ticker-top {
-    animation: scroll-left 30s linear infinite;
-  }
-
-  .logo-ticker-bottom {
-    animation: scroll-right 30s linear infinite;
-  }
-
-  .logo-ticker:hover {
-    animation-duration: 10s;
-  }
-
-  .logo-ticker-track {
-    display: flex;
+  .ticker-content {
+    display: inline-flex;
     align-items: center;
     gap: 4em;
-    flex-shrink: 0;
+    height: 100%;
+    animation: scroll-left 30s linear infinite;
   }
 
   .logo-item {
@@ -357,33 +338,26 @@
     width: auto;
     filter: brightness(0) invert(1); /* Makes SVG white */
     object-fit: contain;
-    flex-shrink: 0;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-    shape-rendering: geometricPrecision;
-    vector-effect: non-scaling-stroke;
+    flex-shrink: 0;
+  }
+
+  /* Bottom ticker - reverse direction */
+  #logo-ticker-bottom .ticker-content {
+    animation: scroll-right 30s linear infinite;
   }
 
   @keyframes scroll-left {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    100% {
-      transform: translate3d(-100%, 0, 0);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
   }
 
   @keyframes scroll-right {
-    0% {
-      transform: translate3d(-100%, 0, 0);
-    }
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
   }
+
 
 
 
@@ -588,11 +562,13 @@
       
       <!-- Logo Tickers -->
       <div class="logo-ticker-container">
-        <div class="logo-ticker logo-ticker-top" id="logo-ticker-top">
-          <!-- Logos will be dynamically inserted here -->
+        <div class="ticker-track" id="logo-ticker-top">
+          <div class="ticker-content" id="ticker-content-top"></div>
+          <div class="ticker-content" id="ticker-content-top-clone"></div>
         </div>
-        <div class="logo-ticker logo-ticker-bottom" id="logo-ticker-bottom">
-          <!-- Logos will be dynamically inserted here -->
+        <div class="ticker-track" id="logo-ticker-bottom">
+          <div class="ticker-content" id="ticker-content-bottom"></div>
+          <div class="ticker-content" id="ticker-content-bottom-clone"></div>
         </div>
       </div>
     </section>
@@ -663,6 +639,7 @@
   <!-- External Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codyhouse/5.0.0/js/util.js"></script>
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
@@ -829,15 +806,12 @@
     updateLocalTime();
   }, 3000);
 
-  // Create logo tickers
+  // Create logo tickers with CodyHouse ticker approach
   function createLogoTickers() {
-    const logoTickerTop = document.getElementById('logo-ticker-top');
-    const logoTickerBottom = document.getElementById('logo-ticker-bottom');
-    if (!logoTickerTop || !logoTickerBottom) return;
-
     // Array of all logo data
     const logos = [
       { src: 'Images/svg/AccentureSong.svg', alt: 'Accenture Song' },
+      { src: 'Images/svg/Apple.svg', alt: 'Apple' },
       { src: 'Images/svg/Asia_Cup.svg', alt: 'Asia Cup' },
       { src: 'Images/svg/Atout.svg', alt: 'Atout' },
       { src: 'Images/svg/Aus_Gov.svg', alt: 'Australian Government' },
@@ -869,44 +843,39 @@
       { src: 'Images/svg/Warner Music Group logo since 2021.svg', alt: 'Warner Music Group' }
     ];
 
-    // Split logos into two groups (15 logos each)
+    // Split logos into two groups
     const logosPerTicker = Math.ceil(logos.length / 2);
     const topLogos = logos.slice(0, logosPerTicker);
     const bottomLogos = logos.slice(logosPerTicker);
 
-    // Create tracks for a specific ticker with specific logos
-    function createTickerTracks(ticker, logoSet) {
-      const track1 = document.createElement('div');
-      track1.className = 'logo-ticker-track';
+    // Create ticker function
+    function createTicker(tickerId, logoSet) {
+      const tickerContent = document.getElementById(tickerId);
+      const tickerClone = document.getElementById(tickerId + '-clone');
       
-      const track2 = document.createElement('div');
-      track2.className = 'logo-ticker-track';
+      if (!tickerContent || !tickerClone) return;
 
-      // Add logos to both tracks
-      logoSet.forEach(logo => {
-        const img1 = document.createElement('img');
-        img1.src = logo.src;
-        img1.alt = logo.alt;
-        img1.className = 'logo-item';
+      // Create logos for both content and clone
+      logoSet.forEach((logo, index) => {
+        const img = document.createElement('img');
+        img.src = logo.src;
+        img.alt = logo.alt;
+        img.className = 'logo-item';
         
-        const img2 = document.createElement('img');
-        img2.src = logo.src;
-        img2.alt = logo.alt;
-        img2.className = 'logo-item';
+        // Add extra padding to the first logo
+        if (index === 0) {
+          img.style.paddingLeft = '4em';
+        }
         
-        track1.appendChild(img1);
-        track2.appendChild(img2);
+        // Add to both content and clone
+        tickerContent.appendChild(img.cloneNode(true));
+        tickerClone.appendChild(img);
       });
-
-      // Clear existing content and add tracks
-      ticker.innerHTML = '';
-      ticker.appendChild(track1);
-      ticker.appendChild(track2);
     }
 
-    // Populate each ticker with different logo sets
-    createTickerTracks(logoTickerTop, topLogos);
-    createTickerTracks(logoTickerBottom, bottomLogos);
+    // Create both tickers
+    createTicker('ticker-content-top', topLogos);
+    createTicker('ticker-content-bottom', bottomLogos);
   }
 
   // Initialize logo tickers when page loads
